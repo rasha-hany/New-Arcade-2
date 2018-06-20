@@ -1,6 +1,5 @@
 // Sets an initial player score of 0.
-var score = 0;
-
+var score = 5;
 document.getElementById('playerScore').innerHTML = score;
 
 
@@ -42,7 +41,7 @@ Enemy.prototype.update = function(dt) {
         
          score = 0;
 		document.getElementById('playerScore').innerHTML = score; 
-        
+        player.reset();
     };	
    
     
@@ -68,13 +67,23 @@ player.prototype.update = function (dt) {
     
     // If the player reaches the water
     
-        if (player.y < 10) {
+        if (player.y < 20) {
             
 	score++;
 	document.getElementById('playerScore').innerHTML = score;
 	this.reset();
 	
   };
+      
+};
+ player.prototype.reset = function(){
+     this.x = 202;
+     this.y = 405;
+    
+ };
+player.prototype.collisionReset = function (){
+    this.reset();
+ 
 };
 
 player.prototype.render = function() {
