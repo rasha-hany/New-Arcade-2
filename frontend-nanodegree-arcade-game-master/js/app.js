@@ -1,5 +1,5 @@
 // Sets an initial player score of 0.
-var score = 5;
+var score = 0;
 document.getElementById('playerScore').innerHTML = score;
 
 
