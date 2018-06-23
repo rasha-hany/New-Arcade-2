@@ -2,6 +2,8 @@
 var score = 0;
 document.getElementById('playerScore').innerHTML = score;
 
+let winDiv = document.querySelector('.Wins');
+winDiv.innerHTML = 'You score 8';
 
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
@@ -23,7 +25,12 @@ var Enemy = function(x, y, speed) {
 
 
 
-
+winGame(){
+        this.win +=1 ;
+        winDiv.innerHTML = `You Won ( ${this.win} ) ` ;
+        alert('YOU WIN');
+        this.reset();
+ };
 
 Enemy.prototype.update = function(dt) {
 	this.x += this.speed * dt;
@@ -56,14 +63,14 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-var player = function(x, y) {
+var Player = function(x, y) {
 	this.x = x;
 	this.y = y;
-	this.player = 'images/char-princess-girl.png'
+	this.Player = 'images/char-princess-girl.png'
 }
 // Now write your own player class
 
-player.prototype.update = function (dt) {
+Player.prototype.update = function (dt) {
     
     // If the player reaches the water
     
@@ -72,28 +79,28 @@ player.prototype.update = function (dt) {
 	score++;
 	document.getElementById('playerScore').innerHTML = score;
 	this.reset();
-	
+    this.checkGameWin();
   };
       
 };
- player.prototype.reset = function(){
+ Player.prototype.reset = function(){
      this.x = 202;
      this.y = 405;
     
  };
-player.prototype.collisionReset = function (){
+Player.prototype.collisionReset = function (){
     this.reset();
  
 };
 
-player.prototype.render = function() {
-	ctx.drawImage(Resources.get(this.player), this.x, this.y);
+Player.prototype.render = function() {
+	ctx.drawImage(Resources.get(this.Player), this.x, this.y);
 };
 // This class requires an update(), render() and
 
 // a handleInput() method.
  
-player.prototype.handleInput = function (keyPress) {
+Player.prototype.handleInput = function (keyPress) {
     
 	if (keyPress == 'left' && this.x > 0) {
 		this.x -= 102;
@@ -115,7 +122,7 @@ player.prototype.handleInput = function (keyPress) {
 	}
 }
 
-
+ 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
@@ -128,9 +135,11 @@ enemyLocation.forEach(function (locationY) {
 	allEnemies.push(enemy);
 });
 
+
+
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
-var player = new player(202, 405);
+var player = new Player(202, 405);
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
