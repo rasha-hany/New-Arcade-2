@@ -2,7 +2,7 @@
 var score = 0;
 document.getElementById('playerScore').innerHTML = score;
 
-let winDiv = document.querySelector('.Wins');
+let winDiv = ('.Wins');
 winDiv.innerHTML = 'You score 8';
 
 // Enemies our player must avoid
@@ -25,7 +25,7 @@ var Enemy = function(x, y, speed) {
 
 
 
-winGame(){
+winGame = function (){
         this.win +=1 ;
         winDiv.innerHTML = `You Won ( ${this.win} ) ` ;
         alert('YOU WIN');
