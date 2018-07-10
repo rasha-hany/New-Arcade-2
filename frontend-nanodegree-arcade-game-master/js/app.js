@@ -79,7 +79,6 @@ Player.prototype.update = function (dt) {
 	score++;
 	document.getElementById('playerScore').innerHTML = score;
 	this.reset();
-    this.checkGameWin();
   };
       
 };
